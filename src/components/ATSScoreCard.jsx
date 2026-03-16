@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 Chart.register(ArcElement, Tooltip, DoughnutController, CategoryScale);
 
-const ATSScoreCard = ({ score }) => {
+const ATSScoreCard = ({ score = 0 }) => {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -18,7 +18,7 @@ const ATSScoreCard = ({ score }) => {
       chartRef.current = null;
     }
 
-    // Unique canvas ID to prevent conflicts
+    // Unique canvas ID
     canvas.id = 'ats-chart';
 
     const ctx = canvas.getContext("2d");
@@ -35,7 +35,7 @@ const ATSScoreCard = ({ score }) => {
               "rgba(15, 23, 42, 0.7)",
             ],
             borderWidth: 0,
-            cutout: "70%",
+            cutout: "75%",
           },
         ],
       },
@@ -76,43 +76,41 @@ const ATSScoreCard = ({ score }) => {
             Simulated match between your resume and a generic ATS profile.
           </p>
         </div>
-        <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
-          Mock score
-        </span>
+
       </div>
 
-      <div className="mt-2 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
-        <div className="relative h-32 w-32 shrink-0 sm:h-36 sm:w-36">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
+        <div className="relative h-36 w-36 shrink-0 sm:h-44 sm:w-44">
           <canvas ref={canvasRef} />
           <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center z-10"
           >
-            <span className="text-3xl font-semibold text-slate-50">
-              {score}
+            <span className="text-4xl font-bold bg-gradient-to-br from-white to-slate-100 bg-clip-text text-transparent drop-shadow-2xl mb-1">
+              {Math.round(score)}
             </span>
-            <span className="mt-1 text-[11px] uppercase tracking-[0.22em] text-slate-400">
+            <span className="text-xs uppercase tracking-[0.25em] text-slate-500 font-medium">
               / 100
             </span>
           </motion.div>
         </div>
 
-        <div className="flex-1 text-sm text-slate-300">
-          <p className="font-medium text-slate-100">{label}</p>
-          <p className="mt-2 text-xs text-slate-300">
+        <div className="flex-1 text-sm text-slate-300 space-y-2">
+          <p className="font-semibold text-slate-100 text-lg">{label}</p>
+          <p className="text-xs leading-relaxed">
             This visualization approximates how aligned your resume might be
             with a typical ATS search. Use the skills, sections, and suggestions
             panels to increase this score.
           </p>
-          <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-slate-300">
-            <span className="rounded-full bg-emerald-400/10 px-2.5 py-1 text-emerald-300">
+          <div className="flex flex-wrap gap-2 pt-2">
+            <span className="rounded-full bg-emerald-400/10 px-3 py-1.5 text-xs font-medium text-emerald-300 border border-emerald-400/20">
               Keywords
             </span>
-            <span className="rounded-full bg-sky-400/10 px-2.5 py-1 text-sky-300">
+            <span className="rounded-full bg-sky-400/10 px-3 py-1.5 text-xs font-medium text-sky-300 border border-sky-400/20">
               Section quality
             </span>
-            <span className="rounded-full bg-violet-400/10 px-2.5 py-1 text-violet-300">
+            <span className="rounded-full bg-violet-400/10 px-3 py-1.5 text-xs font-medium text-violet-300 border border-violet-400/20">
               Coverage vs. job
             </span>
           </div>
@@ -123,3 +121,4 @@ const ATSScoreCard = ({ score }) => {
 };
 
 export default ATSScoreCard;
+
