@@ -8,6 +8,7 @@ const allowedTypes = [
 
 const ResumeUploader = ({
   onFileSelect,
+  onClearResume,
   file,
   uploadProgress,
   error,
@@ -45,7 +46,7 @@ const ResumeUploader = ({
             1. Upload Resume
           </h2>
           <p className="mt-2 text-sm text-slate-300">
-            Drag &amp; drop your resume in PDF or DOCX format. We will extract
+            Drag & drop your resume in PDF or DOCX format. We will extract
             the raw text locally in your browser.
           </p>
           <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-slate-400">
@@ -116,11 +117,27 @@ const ResumeUploader = ({
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-4 w-full max-w-xs text-left text-xs text-slate-300"
               >
-                <p className="font-medium text-slate-100">Selected file</p>
-                <p className="truncate text-slate-300">{file.name}</p>
-                <p className="mt-0.5 text-[11px] text-slate-400">
-                  {Math.round(file.size / 1024)} KB · text extracted
-                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium text-slate-100">Selected file</p>
+                    <p className="truncate text-slate-300">{file.name}</p>
+                    <p className="mt-0.5 text-[11px] text-slate-400">
+                      {Math.round(file.size / 1024)} KB · text extracted
+                    </p>
+                  </div>
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onClearResume();
+                    }}
+                    className="flex h-7 w-7 items-center justify-center rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/40 transition-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title="Clear resume"
+                  >
+                    ×
+                  </motion.button>
+                </div>
               </motion.div>
             )}
 
@@ -149,4 +166,3 @@ const ResumeUploader = ({
 };
 
 export default ResumeUploader;
-

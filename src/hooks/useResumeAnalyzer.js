@@ -63,6 +63,14 @@ export function useResumeAnalyzer() {
     }, 900);
   }, [resumeText, jobDescription]);
 
+  const clearResume = useCallback(() => {
+    setResumeFile(null);
+    setResumeText("");
+    setAnalysis(null);
+    setUploadProgress(0);
+    setError("");
+  }, []);
+
   return {
     resumeFile,
     resumeText,
@@ -74,6 +82,6 @@ export function useResumeAnalyzer() {
     error,
     handleFile,
     runAnalysis,
+    clearResume,
   };
 }
-

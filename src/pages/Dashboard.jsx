@@ -20,12 +20,14 @@ const Dashboard = () => {
     error,
     handleFile,
     runAnalysis,
+    clearResume,
   } = useResumeAnalyzer();
 
   return (
     <section className="space-y-6">
       <ResumeUploader
         onFileSelect={handleFile}
+        onClearResume={clearResume}
         file={resumeFile}
         uploadProgress={uploadProgress}
         error={error}
