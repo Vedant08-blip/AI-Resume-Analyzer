@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Hero from "./pages/Hero.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import Hero from "./pages/Hero.jsx";\n        import Dashboard from "./pages/Dashboard.jsx";\n        import Footer from "./components/Footer.jsx";
 
 function App() {
   return (
