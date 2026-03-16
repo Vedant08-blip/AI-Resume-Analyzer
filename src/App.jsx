@@ -33,7 +33,7 @@ function App() {
               className="glass-panel hidden items-center gap-3 text-xs text-slate-400 sm:flex"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)] animate-pulse" />
-              <span>Mock AI analysis · Frontend only</span>
+              <span>Mock AI analysis</span>
             </motion.div>
           </div>
         </header>
