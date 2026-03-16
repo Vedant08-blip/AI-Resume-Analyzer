@@ -38,10 +38,7 @@ function App() {
           </div>
         </header>
 
-        <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-4 pb-16 pt-8 sm:px-6 lg:px-8">
-          <Hero />
-          <Dashboard />
-        </main>
+        <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-4 pt-8 sm:px-6 lg:px-8">\n          <Hero />\n          <Dashboard />\n        </main>\n        <Footer />
       </div>
     </div>
   );
