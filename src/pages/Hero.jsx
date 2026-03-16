@@ -8,7 +8,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="max-w-3xl"
+        className="w-full"
       >
         <p className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-300 backdrop-blur">
           Powered by mock AI · ATS-focused
@@ -18,7 +18,7 @@ const Hero = () => {
           <span className="text-accent-blue">ATS-optimized</span> job
           applications.
         </h1>
-        <p className="mt-4 max-w-xl text-sm text-slate-300 sm:text-base">
+        <p className="mt-4 text-sm text-slate-300 sm:text-base">
           Upload your resume and instantly simulate how modern Applicant
           Tracking Systems read and score your profile. Detect missing skills,
           match job descriptions, and get actionable suggestions to stand out.
@@ -47,4 +47,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
