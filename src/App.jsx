@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Hero from "./pages/Hero.jsx";\n        import Dashboard from "./pages/Dashboard.jsx";\n        import Footer from "./components/Footer.jsx";
+import Hero from "./pages/Hero.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 function App() {
   return (
@@ -37,7 +38,10 @@ function App() {
           </div>
         </header>
 
-        <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-4 pt-8 sm:px-6 lg:px-8">\n          <Hero />\n          <Dashboard />\n        </main>\n        <Footer />
+        <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+          <Hero />
+          <Dashboard />
+        </main>
       </div>
     </div>
   );
