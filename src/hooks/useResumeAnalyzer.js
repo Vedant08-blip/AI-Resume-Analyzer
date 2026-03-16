@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import { extractTextFromPdf } from "../utils/pdfUtils.js";
 import { analyzeResumeText } from "../utils/mockAnalysis.js";
+import { analyzeResumeWithAI } from "../utils/realAnalysis.js";
+import toast from "react-hot-toast";
 
 export function useResumeAnalyzer() {
   const [resumeFile, setResumeFile] = useState(null);
@@ -30,9 +32,8 @@ export function useResumeAnalyzer() {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
         file.name.toLowerCase().endsWith(".docx")
       ) {
-        // DOCX placeholder – real parsing can be added later.
         text =
-          "DOCX parsing not implemented in this demo. Convert your resume to PDF for better results.\n\nFile name: " +
+          "DOCX parsing not implemented. Convert to PDF for best results.\\n\\nFile name: " +
           file.name;
         setUploadProgress(70);
       } else {
@@ -43,24 +44,38 @@ export function useResumeAnalyzer() {
       setUploadProgress(100);
     } catch (err) {
       console.error(err);
+      toast.error(err.message || "Failed to process resume.");
       setError(err.message || "Failed to process resume.");
       setUploadProgress(0);
     }
   }, []);
 
-  const runAnalysis = useCallback(() => {
+  const runAnalysis = useCallback(async () => {
     if (!resumeText) {
-      setError("Upload a resume before running analysis.");
+      toast.error("Upload a resume before running analysis.");
       return;
     }
     setError("");
     setIsAnalyzing(true);
 
-    setTimeout(() => {
-      const result = analyzeResumeText(resumeText, jobDescription);
+    try {
+      let result;
+      if (import.meta.env.VITE_OPENAI_API_KEY) {
+        toast.loading("Analyzing with real AI...", { id: "analysis" });
+        result = await analyzeResumeWithAI(resumeText, jobDescription);
+        toast.success("AI analysis complete!", { id: "analysis" });
+      } else {
+        toast("Using mock analysis (add VITE_OPENAI_API_KEY to .env)", { duration: 4000 });
+        result = analyzeResumeText(resumeText, jobDescription);
+      }
       setAnalysis(result);
+    } catch (err) {
+      toast.error("Analysis failed, using mock.", { id: "analysis" });
+      const mockResult = analyzeResumeText(resumeText, jobDescription);
+      setAnalysis(mockResult);
+    } finally {
       setIsAnalyzing(false);
-    }, 900);
+    }
   }, [resumeText, jobDescription]);
 
   const clearResume = useCallback(() => {
@@ -85,3 +100,4 @@ export function useResumeAnalyzer() {
     clearResume,
   };
 }
+

@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import Hero from "./pages/Hero.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -42,6 +43,16 @@ function App() {
           <Hero />
           <Dashboard />
         </main>
+        <Toaster 
+          position="top-right" 
+          toastOptions={{ 
+            style: { 
+              background: 'rgba(15, 23, 42, 0.95)', 
+              color: '#f1f5f9', 
+              backdropFilter: 'blur(10px)' 
+            } 
+          }} 
+        />
       </div>
     </div>
   );

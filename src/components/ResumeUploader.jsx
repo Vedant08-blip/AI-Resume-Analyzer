@@ -1,5 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import toast from "react-hot-toast";
 
 const allowedTypes = [
   "application/pdf",
@@ -21,7 +22,7 @@ const ResumeUploader = ({
       const file = files?.[0];
       if (!file) return;
       if (!allowedTypes.includes(file.type) && !file.name.endsWith(".docx")) {
-        alert("Please upload a PDF or DOCX file.");
+        toast.error("Please upload a PDF or DOCX file.");
         return;
       }
       onFileSelect(file);
@@ -166,3 +167,4 @@ const ResumeUploader = ({
 };
 
 export default ResumeUploader;
+
