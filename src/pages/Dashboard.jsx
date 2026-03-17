@@ -115,13 +115,11 @@ const Dashboard = () => {
         <>
           <div className="grid gap-5 lg:grid-cols-2">
             <div className="space-y-3">
-              <div className="rounded-2xl border border-white/5 bg-black/20 px-4 py-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+              <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.22em]">
+                <span className="rounded-full bg-white/10 px-3 py-1 font-semibold text-slate-200">
                   Resume A
-                </p>
-                <p className="mt-1 text-xs text-slate-400">
-                  Upload the first candidate resume.
-                </p>
+                </span>
+                <span className="text-slate-500">First candidate</span>
               </div>
               <ResumeUploader
                 onFileSelect={compareLeft.handleFile}
@@ -130,17 +128,17 @@ const Dashboard = () => {
                 uploadProgress={compareLeft.uploadProgress}
                 error={compareLeft.error}
                 resumeText={compareLeft.resumeText}
+                variant="compare"
+                showPreview={false}
               />
             </div>
 
             <div className="space-y-3">
-              <div className="rounded-2xl border border-white/5 bg-black/20 px-4 py-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+              <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.22em]">
+                <span className="rounded-full bg-white/10 px-3 py-1 font-semibold text-slate-200">
                   Resume B
-                </p>
-                <p className="mt-1 text-xs text-slate-400">
-                  Upload the second candidate resume.
-                </p>
+                </span>
+                <span className="text-slate-500">Second candidate</span>
               </div>
               <ResumeUploader
                 onFileSelect={compareRight.handleFile}
@@ -149,6 +147,8 @@ const Dashboard = () => {
                 uploadProgress={compareRight.uploadProgress}
                 error={compareRight.error}
                 resumeText={compareRight.resumeText}
+                variant="compare"
+                showPreview={false}
               />
             </div>
           </div>

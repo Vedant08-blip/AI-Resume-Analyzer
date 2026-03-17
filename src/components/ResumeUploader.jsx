@@ -14,6 +14,8 @@ const ResumeUploader = ({
   uploadProgress,
   error,
   resumeText,
+  variant = "default",
+  showPreview = true,
 }) => {
   const inputRef = useRef(null);
 
@@ -39,18 +41,33 @@ const ResumeUploader = ({
     e.preventDefault();
   };
 
+  const isCompare = variant === "compare";
+  const containerClass = isCompare
+    ? "glass-panel gradient-border relative overflow-hidden rounded-3xl p-4"
+    : "glass-panel gradient-border relative overflow-hidden rounded-3xl p-4 sm:p-6";
+  const layoutClass = isCompare
+    ? "flex flex-col gap-4"
+    : "flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between";
+  const descriptionClass = isCompare ? "mt-2 text-xs text-slate-300" : "mt-2 text-sm text-slate-300";
+  const chipClass = isCompare
+    ? "mt-3 flex flex-wrap gap-2 text-[10px] text-slate-400"
+    : "mt-4 flex flex-wrap gap-2 text-[11px] text-slate-400";
+  const dropZoneClass = isCompare
+    ? "group relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-600/60 bg-slate-900/60 px-4 py-5 text-center transition-colors hover:border-accent-blue/70"
+    : "group relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-600/60 bg-slate-900/60 px-4 py-6 text-center transition-colors hover:border-accent-blue/70";
+
   return (
-    <div className="glass-panel gradient-border relative overflow-hidden rounded-3xl p-4 sm:p-6">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-        <div className="sm:max-w-sm">
+    <div className={containerClass}>
+      <div className={layoutClass}>
+        <div className={isCompare ? "" : "sm:max-w-sm"}>
           <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">
-            1. Upload Resume
+            {isCompare ? "Upload Resume" : "1. Upload Resume"}
           </h2>
-          <p className="mt-2 text-sm text-slate-300">
+          <p className={descriptionClass}>
             Drag & drop your resume in PDF or DOCX format. We will extract
             the raw text locally in your browser.
           </p>
-          <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-slate-400">
+          <div className={chipClass}>
             <span className="rounded-full bg-white/5 px-2.5 py-1">
               No file upload to server
             </span>
@@ -65,7 +82,7 @@ const ResumeUploader = ({
             onDrop={onDrop}
             onDragOver={onDragOver}
             whileHover={{ scale: 1.01 }}
-            className="group relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-600/60 bg-slate-900/60 px-4 py-6 text-center transition-colors hover:border-accent-blue/70"
+            className={dropZoneClass}
             onClick={() => inputRef.current?.click()}
           >
             <input
@@ -76,14 +93,14 @@ const ResumeUploader = ({
               onChange={(e) => handleFiles(e.target.files)}
             />
             <div className="flex flex-col items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-accent-purple/80 to-accent-blue/80 text-xl shadow-lg shadow-accent-purple/40">
+              <div className={`flex items-center justify-center rounded-2xl bg-gradient-to-tr from-accent-purple/80 to-accent-blue/80 text-xl shadow-lg shadow-accent-purple/40 ${isCompare ? "h-10 w-10" : "h-12 w-12"}`}>
                 ⬆
               </div>
               <div>
-                <p className="text-sm font-medium text-slate-100">
+                <p className={`font-medium text-slate-100 ${isCompare ? "text-xs" : "text-sm"}`}>
                   Drop your resume here
                 </p>
-                <p className="mt-1 text-xs text-slate-400">
+                <p className={`mt-1 text-slate-400 ${isCompare ? "text-[11px]" : "text-xs"}`}>
                   or click to browse from your device
                 </p>
               </div>
@@ -116,7 +133,7 @@ const ResumeUploader = ({
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-4 w-full max-w-xs text-left text-xs text-slate-300"
+                className={`mt-4 w-full max-w-xs text-left text-xs text-slate-300 ${isCompare ? "max-w-none" : ""}`}
               >
                 <div className="flex items-center justify-between">
                   <div>
@@ -149,7 +166,7 @@ const ResumeUploader = ({
         </div>
       </div>
 
-      {resumeText && (
+      {showPreview && resumeText && (
         <div className="mt-6">
           <h3 className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-slate-400">
             Raw extracted text (preview)
@@ -167,4 +184,3 @@ const ResumeUploader = ({
 };
 
 export default ResumeUploader;
-
