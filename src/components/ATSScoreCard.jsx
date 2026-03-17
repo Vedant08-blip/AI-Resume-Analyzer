@@ -18,9 +18,6 @@ const ATSScoreCard = ({ score = 0 }) => {
       chartRef.current = null;
     }
 
-    // Unique canvas ID
-    canvas.id = 'ats-chart';
-
     const ctx = canvas.getContext("2d");
 
     chartRef.current = new Chart(ctx, {
@@ -121,4 +118,3 @@ const ATSScoreCard = ({ score = 0 }) => {
 };
 
 export default ATSScoreCard;
-
