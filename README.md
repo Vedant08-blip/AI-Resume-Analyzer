@@ -1,109 +1,79 @@
-## AI Resume Analyzer (Frontend Only)
+## 🚀 AI Resume Analyzer - **Real AI ATS Scoring**
 
-A modern, dark-mode, AI-style **Resume Analyzer** built with **React (Vite)**, **Tailwind CSS**, **Framer Motion**, **Chart.js**, and **pdf.js** for local PDF text extraction.
+Modern **React** app with **OpenAI GPT-4o-mini** for real ATS analysis. Upload PDF, get AI-powered scores, skills gaps & suggestions. Fully client-side (PDF parsing), secure API fallback.
 
-This project uses **mock analysis** logic only (no backend). It is structured so you can later plug in a real AI/ATS API.
+[![Vite](https://img.shields.io/badge/vite-6.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![React](https://img.shields.io/badge/react-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev)
 
-### Tech Stack
+### ✨ **Key Features**
+- **Real AI Analysis**: OpenAI GPT-4o-mini (ATS score, skills, suggestions, section scores).
+- **Client-side PDF Extraction**: pdf.js (no server uploads).
+- **Job Matching**: Paste JD, highlights missing keywords.
+- **Dark Glassmorphism UI**: Tailwind + Framer Motion.
+- **Dev Ready**: ESLint, Prettier, Vitest.
 
-- **React + Vite**
-- **Tailwind CSS**
-- **Framer Motion** for layout / hover / loading animations
-- **Chart.js** for the ATS score circular chart
-- **pdf.js (pdfjs-dist)** for reading text from uploaded PDF resumes
+### 🛠 Tech Stack
+- React 18 + Vite 6
+- TailwindCSS, Framer Motion
+- Chart.js, pdfjs-dist, OpenAI
+- react-hot-toast, Vitest
 
-### Key Features
+### 🚀 Quick Start
+1. Clone & install:
+   ```bash
+   npm install
+   ```
+2. **Add OpenAI key** (for real AI):
+   ```
+   cp .env.example .env
+   # Edit .env: VITE_OPENAI_API_KEY=sk-...
+   ```
+3. Dev server:
+   ```bash
+   npm run dev
+   ```
+4. Open `localhost:5173`
 
-- Dark, futuristic UI with glassmorphism and gradient accents.
-- Drag-and-drop resume upload (PDF + DOCX placeholder).
-- Local PDF text extraction with `pdf.js` (no server upload).
-- Mock ATS-style analysis:
-  - Overall ATS score (0–100) with animated circular chart.
-  - Detected skills vs. missing skills.
-  - Strengths, weaknesses, and suggestions.
-  - Section-wise scores (Skills, Experience, Projects, Education).
-- Job description matcher:
-  - Paste job description text.
-  - Highlights missing keywords versus the resume.
-- Animated loading state while "analyzing".
+### 🎯 **How AI Works**
+```
+Upload PDF → pdf.js extracts text → OpenAI prompt → Structured JSON → UI charts
+```
+- **Fallback**: Mock analysis if no key.
+- **Prompt**: ATS-focused (score 0-100, skills, gaps, sections).
 
-### Project Structure
-
-```text
+### 📁 Structure
+```
 src/
-  components/
-    ATSScoreCard.jsx
-    JobMatcher.jsx
-    LoadingAnimation.jsx
-    ResumeSuggestions.jsx
-    ResumeUploader.jsx
-    SectionInsights.jsx
-    SkillsAnalysis.jsx
-  hooks/
-    useResumeAnalyzer.js
-  pages/
-    Dashboard.jsx
-    Hero.jsx
-  utils/
-    mockAnalysis.js
-    pdfUtils.js
-  App.jsx
-  main.jsx
-  index.css
+├── components/     ResumeUploader, ATSScoreCard...
+├── hooks/          useResumeAnalyzer.js (AI logic)
+├── utils/          realAnalysis.js (OpenAI), mockAnalysis.js
+├── pages/          Dashboard, Hero
 ```
 
-### Getting Started
-
-1. **Install dependencies**
-
+### 🔧 Scripts
 ```bash
-cd AI-Resume-Analyzer
-npm install
+npm run dev      # Development
+npm run build    # Production build
+npm run lint     # ESLint
+npm run format   # Prettier
+npm test         # Vitest
+npm run preview  # Preview build
 ```
 
-2. **Run the dev server**
-
-```bash
-npm run dev
+### .env Setup
 ```
-
-3. Open the printed local URL in your browser (typically `http://localhost:5173`).
-
-### How PDF Extraction Works
-
-- When you upload a PDF, the app:
-  - Reads it into an `ArrayBuffer` in the browser.
-  - Uses `pdfjs-dist` (`getDocument`) to parse pages.
-  - Concatenates page text into a single string.
-  - Stores that string in React state for analysis.
-
-DOCX parsing is currently mocked with a placeholder string so you can later plug in a real DOCX parser or server-side pipeline.
-
-### Where to Plug in a Real AI API
-
-- Look at `src/utils/mockAnalysis.js` and `src/hooks/useResumeAnalyzer.js`.
-- Replace the `analyzeResumeText` implementation, or call an external API from within `runAnalysis` in the `useResumeAnalyzer` hook.
-- Keep the return shape similar to keep the UI components working:
-
-```js
-{
-  atsScore: number,            // 0–100
-  detectedSkills: string[],
-  missingSkills: string[],
-  strengths: string[],
-  weaknesses: string[],
-  suggestions: string[],
-  sectionScores: {
-    skills: number,
-    experience: number,
-    projects: number,
-    education: number,
-  },
-}
+VITE_OPENAI_API_KEY=sk-your-key-here
 ```
+**Note**: Frontend-only. Key exposed client-side (fine for demo; proxy for prod).
 
-### Notes
+### 📈 **Next Steps (TODO.md)**
+- DOCX support (mammoth.js)
+- Multi-resume compare
+- PDF export
+- PWA
 
-- This is a **frontend-only** demo; no resumes are sent to a server.
-- The analysis logic is heuristic and for demonstration only.
+### 🙌 Credits
+Built with Vite, Tailwind, OpenAI. Demo → Production ready!
+
+⭐ **Star if useful!**
 
