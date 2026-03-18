@@ -35,7 +35,7 @@ const Dashboard = () => {
   return (
     <section className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
-        <div className="rounded-full bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
+        <div className="rounded-full bg-rose-500/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-rose-200 border border-rose-400/30 shadow-[0_0_18px_rgba(244,63,94,0.35)]">
           View mode
         </div>
         <div className="flex flex-wrap gap-2">
