@@ -17,11 +17,19 @@ function App() {
               transition={{ duration: 0.4 }}
               className="flex items-center gap-3"
             >
-              <div className="relative h-12 w-12">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-purple to-accent-blue shadow-2xl shadow-accent-blue/50" />
-                <span className="absolute inset-1 flex items-center justify-center rounded-xl bg-slate-900/90 border border-white/20 text-xl font-black bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent shadow-inner">
-                  AI
-                </span>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900/70 shadow-2xl shadow-black/40 border border-white/10">
+                <svg
+                  viewBox="0 0 64 64"
+                  aria-hidden="true"
+                  className="h-9 w-9"
+                >
+                  <rect width="64" height="64" rx="12" fill="#111827" />
+                  <rect x="16" y="14" width="32" height="36" rx="4" fill="#ffffff" />
+                  <rect x="20" y="22" width="18" height="3" rx="1.5" fill="#111827" />
+                  <rect x="20" y="28" width="24" height="3" rx="1.5" fill="#111827" />
+                  <rect x="20" y="34" width="20" height="3" rx="1.5" fill="#111827" />
+                  <circle cx="44" cy="24" r="4" fill="#10b981" />
+                </svg>
               </div>
               <span className="bg-gradient-to-r from-slate-100 via-blue-100 to-slate-300 bg-clip-text text-xl font-bold tracking-tight text-transparent">
                 Resume Analyzer
@@ -59,4 +67,3 @@ function App() {
 }
 
 export default App;
-
