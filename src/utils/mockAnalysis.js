@@ -1,113 +1,120 @@
-// Simple mock "AI" analysis helpers. These operate purely on text and
-// generate deterministic JSON structures that can later be replaced by
-// real API calls.
+// Enhanced Resume Analyzer (No API Required)
 
 const SKILL_DICTIONARY = [
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Node.js",
-  "Python",
-  "Django",
-  "Flask",
-  "SQL",
-  "NoSQL",
-  "AWS",
-  "Docker",
-  "Kubernetes",
-  "Git",
-  "CI/CD",
-  "Tailwind",
-  "Next.js",
-  "REST",
-  "GraphQL",
+  "javascript","typescript","react","node","node.js","python",
+  "django","flask","sql","nosql","aws","docker","kubernetes",
+  "git","ci/cd","tailwind","next.js","rest","graphql","mongodb","express"
 ];
 
-export function analyzeResumeText(resumeText, jobDescriptionText = "") {
-  const normalizedResume = resumeText.toLowerCase();
-  const normalizedJob = jobDescriptionText.toLowerCase();
+// Utility: clean + normalize text
+const normalizeText = (text) =>
+  text.toLowerCase().replace(/\s+/g, " ").trim();
 
+// Utility: extract keywords smartly
+const extractKeywords = (text) => {
+  return Array.from(
+    new Set(
+      text
+        .toLowerCase()
+        .split(/[^a-zA-Z0-9+#.]+/)
+        .filter((word) => word.length > 3)
+    )
+  );
+};
+
+// Utility: detect numbers/impact (e.g. 50%, 2x, 100 users)
+const hasImpactMetrics = (text) => {
+  return /\b\d+(\+|%|x)?\b/.test(text);
+};
+
+export function analyzeResumeText(resumeText, jobDescriptionText = "") {
+  const resume = normalizeText(resumeText);
+  const job = normalizeText(jobDescriptionText);
+
+  // ✅ Improved skill detection (handles variations)
   const detectedSkills = SKILL_DICTIONARY.filter((skill) =>
-    normalizedResume.includes(skill.toLowerCase())
+    new RegExp(`\\b${skill}\\b`, "i").test(resume)
   );
 
-  const jobKeywords =
-    normalizedJob.length > 0
-      ? Array.from(
-          new Set(
-            normalizedJob
-              .split(/[^a-zA-Z+#]+/)
-              .filter((word) => word.length > 3)
-          )
-        )
-      : [];
+  // ✅ Smarter keyword extraction
+  const jobKeywords = job ? extractKeywords(job) : [];
 
   const missingSkills = jobKeywords.filter(
-    (keyword) => !normalizedResume.includes(keyword)
+    (keyword) => !resume.includes(keyword)
   );
 
   const strengths = [];
   const weaknesses = [];
   const suggestions = [];
 
-  if (detectedSkills.length > 0) {
-    strengths.push("Resume lists several in-demand technical skills.");
+  // ✅ Skills Analysis
+  if (detectedSkills.length >= 5) {
+    strengths.push("Strong technical skillset aligned with industry demand.");
+  } else if (detectedSkills.length > 0) {
+    weaknesses.push("Limited number of technical skills listed.");
+    suggestions.push("Add more relevant tools/technologies (8–15 recommended).");
   } else {
-    weaknesses.push("Skills section is very light or missing.");
-    suggestions.push(
-      "Add a dedicated 'Skills' section with 8–15 relevant technologies."
-    );
+    weaknesses.push("No clear technical skills detected.");
+    suggestions.push("Create a dedicated 'Skills' section.");
   }
 
-  if (normalizedResume.includes("experience")) {
-    strengths.push("Experience section detected with role descriptions.");
+  // ✅ Section Detection
+  const hasExperience = /experience|work history/.test(resume);
+  const hasProjects = /project|portfolio/.test(resume);
+  const hasEducation = /education|degree/.test(resume);
+
+  if (hasExperience) {
+    strengths.push("Experience section is present.");
   } else {
-    weaknesses.push("No clear 'Experience' heading detected.");
-    suggestions.push(
-      "Create a distinct 'Experience' section with bullet-point achievements."
-    );
+    weaknesses.push("Missing 'Experience' section.");
+    suggestions.push("Add work experience with measurable achievements.");
   }
 
-  if (!normalizedResume.includes("project")) {
-    weaknesses.push("Projects section is missing or difficult to identify.");
-    suggestions.push(
-      "Add a 'Projects' section that highlights 2–4 high-impact projects."
-    );
+  if (hasProjects) {
+    strengths.push("Projects section is included.");
   } else {
-    strengths.push("Projects section appears in the resume.");
+    weaknesses.push("Projects section missing.");
+    suggestions.push("Add 2–4 strong projects with impact.");
   }
 
-  if (!normalizedResume.includes("education")) {
-    weaknesses.push("Education section is missing or not clearly labeled.");
-    suggestions.push(
-      "Add an 'Education' section with degree, institution, and graduation year."
-    );
+  if (!hasEducation) {
+    weaknesses.push("Education section missing.");
+    suggestions.push("Include education details clearly.");
   }
 
+  // ✅ Impact Analysis
+  if (hasImpactMetrics(resume)) {
+    strengths.push("Uses measurable achievements (numbers/metrics).");
+  } else {
+    weaknesses.push("No measurable achievements found.");
+    suggestions.push("Add numbers (e.g., improved performance by 30%).");
+  }
+
+  // ✅ Section Scores (Improved Logic)
   const sectionScores = {
-    skills: detectedSkills.length > 5 ? 85 : detectedSkills.length > 0 ? 65 : 40,
-    experience: normalizedResume.includes("experience") ? 80 : 45,
-    projects: normalizedResume.includes("project") ? 78 : 35,
-    education: normalizedResume.includes("education") ? 82 : 50,
+    skills: Math.min(100, detectedSkills.length * 10),
+    experience: hasExperience ? 85 : 40,
+    projects: hasProjects ? 80 : 35,
+    education: hasEducation ? 75 : 45,
+    impact: hasImpactMetrics(resume) ? 90 : 50,
   };
 
+  // ✅ Weighted ATS Score
   const atsScore = Math.round(
-    0.35 * sectionScores.skills +
-      0.3 * sectionScores.experience +
-      0.2 * sectionScores.projects +
-      0.15 * sectionScores.education
+    0.3 * sectionScores.skills +
+    0.25 * sectionScores.experience +
+    0.2 * sectionScores.projects +
+    0.15 * sectionScores.education +
+    0.1 * sectionScores.impact
   );
-
-  const highlightedMissingKeywords = missingSkills.slice(0, 25);
 
   return {
     atsScore,
     detectedSkills,
-    missingSkills: highlightedMissingKeywords,
+    missingSkills: missingSkills.slice(0, 20),
     strengths,
     weaknesses,
     suggestions,
     sectionScores,
   };
 }
-
