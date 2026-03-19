@@ -224,23 +224,16 @@ const Dashboard = () => {
             <div className="grid gap-5 lg:grid-cols-2">
               <motion.div
                 className="relative space-y-5"
-                animate={
-                  winner === "left"
-                    ? {
-                        y: [0, -4, 0],
-                        boxShadow: [
-                          "0 0 0 rgba(251,191,36,0)",
-                          "0 0 30px rgba(251,191,36,0.35)",
-                          "0 0 0 rgba(251,191,36,0)",
-                        ],
-                      }
-                    : { y: 0, boxShadow: "0 0 0 rgba(0,0,0,0)" }
-                }
-                transition={{
-                  duration: 2.4,
-                  repeat: winner === "left" ? Infinity : 0,
-                  ease: "easeInOut",
+                initial={{ opacity: 0, y: 4 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  boxShadow:
+                    winner === "left"
+                      ? "0 0 28px rgba(251,191,36,0.28)"
+                      : "0 0 0 rgba(0,0,0,0)",
                 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
               >
                 {winner === "left" && <ConfettiBurst />}
                 <div className="rounded-2xl border border-white/5 bg-black/20 px-4 py-3">
@@ -312,23 +305,16 @@ const Dashboard = () => {
 
               <motion.div
                 className="relative space-y-5"
-                animate={
-                  winner === "right"
-                    ? {
-                        y: [0, -4, 0],
-                        boxShadow: [
-                          "0 0 0 rgba(251,191,36,0)",
-                          "0 0 30px rgba(251,191,36,0.35)",
-                          "0 0 0 rgba(251,191,36,0)",
-                        ],
-                      }
-                    : { y: 0, boxShadow: "0 0 0 rgba(0,0,0,0)" }
-                }
-                transition={{
-                  duration: 2.4,
-                  repeat: winner === "right" ? Infinity : 0,
-                  ease: "easeInOut",
+                initial={{ opacity: 0, y: 4 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  boxShadow:
+                    winner === "right"
+                      ? "0 0 28px rgba(251,191,36,0.28)"
+                      : "0 0 0 rgba(0,0,0,0)",
                 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
               >
                 {winner === "right" && <ConfettiBurst />}
                 <div className="rounded-2xl border border-white/5 bg-black/20 px-4 py-3">
