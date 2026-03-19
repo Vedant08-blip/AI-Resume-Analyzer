@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 Chart.register(ArcElement, Tooltip, DoughnutController, CategoryScale);
 
-const ATSScoreCard = ({ score = 0 }) => {
+const ATSScoreCard = ({ score = 0, highlight = false }) => {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -63,7 +63,28 @@ const ATSScoreCard = ({ score = 0 }) => {
       : "Needs improvement";
 
   return (
-    <div className="glass-panel gradient-border relative flex flex-col gap-4 rounded-3xl p-5 sm:p-6">
+    <motion.div
+      className={`glass-panel gradient-border relative flex flex-col gap-4 rounded-3xl p-5 sm:p-6 ${
+        highlight ? "ring-1 ring-amber-300/40" : ""
+      }`}
+      animate={
+        highlight
+          ? {
+              boxShadow: [
+                "0 0 0 rgba(251,191,36,0)",
+                "0 0 22px rgba(251,191,36,0.25)",
+                "0 0 0 rgba(251,191,36,0)",
+              ],
+            }
+          : { boxShadow: "0 0 0 rgba(0,0,0,0)" }
+      }
+      transition={{ duration: 2.2, repeat: highlight ? Infinity : 0, ease: "easeInOut" }}
+    >
+      {highlight && (
+        <span className="absolute right-4 top-4 rounded-full bg-amber-400/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-200">
+          Winner
+        </span>
+      )}
       <div className="flex items-center justify-between gap-3">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
@@ -113,7 +134,7 @@ const ATSScoreCard = ({ score = 0 }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

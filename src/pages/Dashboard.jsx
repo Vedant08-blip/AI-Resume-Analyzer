@@ -246,43 +246,10 @@ const Dashboard = () => {
                 </div>
                 {compareLeft.analysis ? (
                   <>
-                    {winner === "left" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -6, scale: 0.98 }}
-                        animate={{
-                          opacity: 1,
-                          y: 0,
-                          scale: [1, 1.03, 1],
-                          boxShadow: [
-                            "0 0 16px rgba(251,191,36,0.25)",
-                            "0 0 32px rgba(251,191,36,0.45)",
-                            "0 0 16px rgba(251,191,36,0.25)",
-                          ],
-                        }}
-                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-                        className="flex items-center gap-2 rounded-2xl border border-amber-300/40 bg-amber-400/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-200"
-                      >
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-300/20 text-amber-200">
-                          <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-                            <path
-                              fill="currentColor"
-                              d="M4 18h16v2H4v-2zm0-2l2.5-9 5 5 4-7 3.5 11H4z"
-                            />
-                          </svg>
-                        </span>
-                        <span>Winner</span>
-                      </motion.div>
-                    )}
-                    {winner === "tie" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="rounded-2xl border border-sky-300/30 bg-sky-400/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-200"
-                      >
-                        Tie
-                      </motion.div>
-                    )}
-                    <ATSScoreCard score={compareLeft.analysis.atsScore} />
+                    <ATSScoreCard
+                      score={compareLeft.analysis.atsScore}
+                      highlight={winner === "left"}
+                    />
                     <SectionInsights
                       sectionScores={compareLeft.analysis.sectionScores}
                     />
@@ -327,43 +294,10 @@ const Dashboard = () => {
                 </div>
                 {compareRight.analysis ? (
                   <>
-                    {winner === "right" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -6, scale: 0.98 }}
-                        animate={{
-                          opacity: 1,
-                          y: 0,
-                          scale: [1, 1.03, 1],
-                          boxShadow: [
-                            "0 0 16px rgba(251,191,36,0.25)",
-                            "0 0 32px rgba(251,191,36,0.45)",
-                            "0 0 16px rgba(251,191,36,0.25)",
-                          ],
-                        }}
-                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-                        className="flex items-center gap-2 rounded-2xl border border-amber-300/40 bg-amber-400/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-200"
-                      >
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-300/20 text-amber-200">
-                          <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-                            <path
-                              fill="currentColor"
-                              d="M4 18h16v2H4v-2zm0-2l2.5-9 5 5 4-7 3.5 11H4z"
-                            />
-                          </svg>
-                        </span>
-                        <span>Winner</span>
-                      </motion.div>
-                    )}
-                    {winner === "tie" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="rounded-2xl border border-sky-300/30 bg-sky-400/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-200"
-                      >
-                        Tie
-                      </motion.div>
-                    )}
-                    <ATSScoreCard score={compareRight.analysis.atsScore} />
+                    <ATSScoreCard
+                      score={compareRight.analysis.atsScore}
+                      highlight={winner === "right"}
+                    />
                     <SectionInsights
                       sectionScores={compareRight.analysis.sectionScores}
                     />
