@@ -31,12 +31,12 @@ export function analyzeResumeText(resumeText, jobDescriptionText = "") {
   const resume = normalizeText(resumeText);
   const job = normalizeText(jobDescriptionText);
 
-  // ✅ Improved skill detection (handles variations)
+  // Improved skill detection (handles variations)
   const detectedSkills = SKILL_DICTIONARY.filter((skill) =>
     new RegExp(`\\b${skill}\\b`, "i").test(resume)
   );
 
-  // ✅ Smarter keyword extraction
+  // Smarter keyword extraction
   const jobKeywords = job ? extractKeywords(job) : [];
 
   const missingSkills = jobKeywords.filter(
@@ -47,7 +47,7 @@ export function analyzeResumeText(resumeText, jobDescriptionText = "") {
   const weaknesses = [];
   const suggestions = [];
 
-  // ✅ Skills Analysis
+  // Skills Analysis
   if (detectedSkills.length >= 5) {
     strengths.push("Strong technical skillset aligned with industry demand.");
   } else if (detectedSkills.length > 0) {
@@ -58,7 +58,7 @@ export function analyzeResumeText(resumeText, jobDescriptionText = "") {
     suggestions.push("Create a dedicated 'Skills' section.");
   }
 
-  // ✅ Section Detection
+  // Section Detection
   const hasExperience = /experience|work history/.test(resume);
   const hasProjects = /project|portfolio/.test(resume);
   const hasEducation = /education|degree/.test(resume);
@@ -82,7 +82,7 @@ export function analyzeResumeText(resumeText, jobDescriptionText = "") {
     suggestions.push("Include education details clearly.");
   }
 
-  // ✅ Impact Analysis
+  // Impact Analysis
   if (hasImpactMetrics(resume)) {
     strengths.push("Uses measurable achievements (numbers/metrics).");
   } else {
@@ -90,7 +90,7 @@ export function analyzeResumeText(resumeText, jobDescriptionText = "") {
     suggestions.push("Add numbers (e.g., improved performance by 30%).");
   }
 
-  // ✅ Section Scores (Improved Logic)
+  // Section Scores (Improved Logic)
   const sectionScores = {
     skills: Math.min(100, detectedSkills.length * 10),
     experience: hasExperience ? 85 : 40,
@@ -99,7 +99,7 @@ export function analyzeResumeText(resumeText, jobDescriptionText = "") {
     impact: hasImpactMetrics(resume) ? 90 : 50,
   };
 
-  // ✅ Weighted ATS Score
+  // Weighted ATS Score
   const atsScore = Math.round(
     0.3 * sectionScores.skills +
     0.25 * sectionScores.experience +

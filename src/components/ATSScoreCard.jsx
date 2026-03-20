@@ -98,14 +98,14 @@ const ATSScoreCard = ({ score = 0, highlight = false }) => {
       </div>
 
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
-        <div className="relative h-36 w-36 shrink-0 sm:h-44 sm:w-44">
+        <div className="relative h-28 w-28 shrink-0 sm:h-36 sm:w-36 md:h-44 md:w-44">
           <canvas ref={canvasRef} />
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center z-10"
           >
-            <span className="text-4xl font-bold bg-gradient-to-br from-white to-slate-100 bg-clip-text text-transparent drop-shadow-2xl mb-1">
+            <span className="text-3xl sm:text-4xl font-bold bg-gradient-to-br from-white to-slate-100 bg-clip-text text-transparent drop-shadow-2xl mb-1">
               {Math.round(score)}
             </span>
             <span className="text-xs uppercase tracking-[0.25em] text-slate-500 font-medium">

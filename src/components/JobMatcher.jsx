@@ -34,7 +34,7 @@ const JobMatcher = ({
             Target job description
           </label>
           <textarea
-            className="mt-2 h-40 w-full rounded-2xl border border-white/5 bg-black/20 p-3 text-sm text-slate-100 outline-none ring-0 transition focus:border-accent-blue/60 focus:ring-1 focus:ring-accent-blue/60"
+            className="mt-2 h-32 w-full rounded-2xl border border-white/5 bg-black/20 p-3 text-sm text-slate-100 outline-none ring-0 transition focus:border-accent-blue/60 focus:ring-1 focus:ring-accent-blue/60 sm:h-40"
             placeholder="Paste the role description you are targeting. We'll look for overlap and missing keywords."
             value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}

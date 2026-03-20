@@ -142,11 +142,11 @@ const Dashboard = () => {
 
           {single.analysis && !single.isAnalyzing && (
             <div className="grid gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-              <div className="space-y-5">
+              <div className="min-w-0 space-y-5">
                 <ATSScoreCard score={single.analysis.atsScore} />
                 <SectionInsights sectionScores={single.analysis.sectionScores} />
               </div>
-              <div className="space-y-5">
+              <div className="min-w-0 space-y-5">
                 <SkillsAnalysis
                   detectedSkills={single.analysis.detectedSkills}
                   missingSkills={single.analysis.missingSkills}
@@ -223,7 +223,7 @@ const Dashboard = () => {
           {(compareLeft.analysis || compareRight.analysis) && !isComparing && (
             <div className="grid gap-5 lg:grid-cols-2">
               <motion.div
-                className="relative space-y-5"
+                className="relative min-w-0 space-y-5"
                 initial={{ opacity: 0, y: 4 }}
                 animate={{
                   opacity: 1,
@@ -271,7 +271,7 @@ const Dashboard = () => {
               </motion.div>
 
               <motion.div
-                className="relative space-y-5"
+                className="relative min-w-0 space-y-5"
                 initial={{ opacity: 0, y: 4 }}
                 animate={{
                   opacity: 1,
