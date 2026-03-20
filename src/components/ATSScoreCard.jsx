@@ -64,7 +64,7 @@ const ATSScoreCard = ({ score = 0, highlight = false }) => {
 
   return (
     <motion.div
-      className={`glass-panel gradient-border relative flex flex-col gap-4 rounded-3xl p-5 sm:p-6 ${
+      className={`glass-panel gradient-border relative flex flex-col gap-4 rounded-3xl p-4 sm:p-6 ${
         highlight ? "ring-1 ring-amber-300/40" : ""
       }`}
       animate={

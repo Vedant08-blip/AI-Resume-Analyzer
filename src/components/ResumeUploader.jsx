@@ -48,7 +48,9 @@ const ResumeUploader = ({
   const layoutClass = isCompare
     ? "flex flex-col gap-4"
     : "flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between";
-  const descriptionClass = isCompare ? "mt-2 text-xs text-slate-300" : "mt-2 text-sm text-slate-300";
+  const descriptionClass = isCompare
+    ? "mt-2 text-xs text-slate-300"
+    : "mt-2 text-xs sm:text-sm text-slate-300";
   const chipClass = isCompare
     ? "mt-3 flex flex-wrap gap-2 text-[10px] text-slate-400"
     : "mt-4 flex flex-wrap gap-2 text-[11px] text-slate-400";
@@ -60,7 +62,7 @@ const ResumeUploader = ({
     <div className={containerClass}>
       <div className={layoutClass}>
         <div className={isCompare ? "" : "sm:max-w-sm"}>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">
+          <h2 className="text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">
             {isCompare ? "Upload Resume" : "1. Upload Resume"}
           </h2>
           <p className={descriptionClass}>

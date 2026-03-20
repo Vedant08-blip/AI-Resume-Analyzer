@@ -30,13 +30,13 @@ const ProgressRow = ({ label, score }) => {
 const SectionInsights = ({ sectionScores }) => {
   const { skills, experience, projects, education } = sectionScores;
   return (
-    <div className="glass-panel gradient-border flex flex-col gap-4 rounded-3xl p-5 sm:p-6">
+    <div className="glass-panel gradient-border flex flex-col gap-4 rounded-3xl p-4 sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
             Section Insights
           </h2>
-          <p className="mt-1 text-sm text-slate-300">
+          <p className="mt-1 text-xs sm:text-sm text-slate-300">
             Approximate strength of each major section based on headings and
             keyword density.
           </p>
@@ -54,4 +54,3 @@ const SectionInsights = ({ sectionScores }) => {
 };
 
 export default SectionInsights;
-

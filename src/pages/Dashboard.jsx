@@ -164,7 +164,7 @@ const Dashboard = () => {
 
       {mode === "compare" && (
         <>
-          <div className="grid gap-5 lg:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             <div className="space-y-3">
               <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.22em]">
                 <span className="rounded-full bg-white/10 px-3 py-1 font-semibold text-slate-200">
@@ -221,7 +221,7 @@ const Dashboard = () => {
           )}
 
           {(compareLeft.analysis || compareRight.analysis) && !isComparing && (
-            <div className="grid gap-5 lg:grid-cols-2">
+            <div className="grid gap-5 md:grid-cols-2">
               <motion.div
                 className="relative min-w-0 space-y-5"
                 initial={{ opacity: 0, y: 4 }}

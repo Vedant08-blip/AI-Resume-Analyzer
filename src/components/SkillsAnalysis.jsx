@@ -21,13 +21,13 @@ const Pill = ({ label, tone = "default" }) => {
 
 const SkillsAnalysis = ({ detectedSkills, missingSkills }) => {
   return (
-    <div className="glass-panel gradient-border flex flex-col gap-4 rounded-3xl p-5 sm:p-6">
+    <div className="glass-panel gradient-border flex flex-col gap-4 rounded-3xl p-4 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
             Skills Coverage
           </h2>
-          <p className="mt-1 text-sm text-slate-300">
+          <p className="mt-1 text-xs sm:text-sm text-slate-300">
             What the ATS is likely to detect from your resume vs. what the job
             description is asking for.
           </p>
@@ -88,4 +88,3 @@ const SkillsAnalysis = ({ detectedSkills, missingSkills }) => {
 };
 
 export default SkillsAnalysis;
-

@@ -34,13 +34,13 @@ const BulletList = ({ title, items, tone }) => {
 
 const ResumeSuggestions = ({ strengths, weaknesses, suggestions }) => {
   return (
-    <div className="glass-panel gradient-border flex flex-col gap-4 rounded-3xl p-5 sm:p-6">
+    <div className="glass-panel gradient-border flex flex-col gap-4 rounded-3xl p-4 sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
             Insights & Suggestions
           </h2>
-          <p className="mt-1 text-sm text-slate-300">
+          <p className="mt-1 text-xs sm:text-sm text-slate-300">
             High-level signals a recruiter or ATS-like system might pick up from
             your current resume.
           </p>
@@ -80,4 +80,3 @@ const ResumeSuggestions = ({ strengths, weaknesses, suggestions }) => {
 };
 
 export default ResumeSuggestions;
-

@@ -21,7 +21,7 @@ const JobMatcher = ({
           <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
             Job Description Matcher
           </h2>
-          <p className="mt-1 text-sm text-slate-300">
+          <p className="mt-1 text-xs sm:text-sm text-slate-300">
             Paste a job description and compare its keywords against your
             resume&apos;s current content.
           </p>
